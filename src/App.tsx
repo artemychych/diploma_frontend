@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import RegistrationPage from './pages/RegistrationPage';
+import LoginPage from './pages/LoginPage';
+import MainPage from './pages/MainPage';
+import VacancyPage from './pages/VacancyPage';
+import TestPage from './pages/TestPage';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import 'dayjs/locale/en-gb';
+import CompanyPage from './pages/CompanyPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LoginPage />}/>
+            <Route path="/registration" element={<RegistrationPage />} />
+            <Route path="/main/:page" element={<MainPage />} />
+            <Route path="/internship/:id" element={<VacancyPage />}/>
+            <Route path="/test/:id" element={<TestPage />} />
+            <Route path="/company/:id" element={<CompanyPage />}/>
+          </Routes>
+      </BrowserRouter>
+    </LocalizationProvider>
+    
   );
 }
 
